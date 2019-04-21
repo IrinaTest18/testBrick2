@@ -6,6 +6,7 @@ import java.net.URL;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -21,7 +22,13 @@ public class TestBase {
   protected static String baseUrl;
   protected static Capabilities capabilities;
 
-  protected WebDriver driver;
+  public WebDriver driver;
+  public WebDriverWait wait;
+
+  public WebDriver getDriver()
+  {
+        return driver;
+  }
 
   @BeforeSuite
   public void initTestSuite() throws IOException {
@@ -36,6 +43,12 @@ public class TestBase {
   @BeforeMethod
   public void initWebDriver() {
     driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
+      //Create a wait. All test classes use this.
+      wait = new WebDriverWait(driver,15);
+
+      //Maximize Window
+      driver.manage().window().maximize();
+
   }
 
   @AfterSuite(alwaysRun = true)

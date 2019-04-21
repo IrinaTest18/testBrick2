@@ -13,7 +13,8 @@ public class HomePageTests extends TestBase {
   private HomePageHelper homepage;
 
   @BeforeMethod
-  public void initPageObjects() {
+  public void initPageObjects()
+  {
     homepage = PageFactory.initElements(driver, HomePageHelper.class);
   }
 
